@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/idol.css" th:href="@{/css/idol.css}">
+    <title>アイドル管理アプリ</title>
+</head>
+<body>
+    <h1>アイドル一覧</h1>
+    <form method="get" action="index.html" th:action="@{/idol}">
+        <label for="keyword">検索キーワード:</label>
+        <input id="keyword" name="keyword" type="text" th:value="${param.keyword}">
+        <button>検索</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>誕生日</th>
+                <th>血液型</th>
+                <th>修正</th>
+                <th>卒業</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="idol : ${idolList}" th:object="${idol}">
+                <td th:text="*{id}">1</td>
+                <td th:text="*{name}">ささき　あああ</td>
+                <td th:text="*{#temporals.format(birthday, 'uuuu年M月d日')}">2001年1月1日</td>
+                <td th:text="*{bloodType}">A</td>
+                <td><a href="fix.html" th:href="@{'/idol/' + *{id}}">修正</a></td>
+                <td>
+                    <form method="post" action="index.html" th:action="@{'/idol/graduate/' + *{id}}">
+                        <button>卒業</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="join.html" th:href="@{/idol/join}">新規加入</a>
+</body>
+</html>

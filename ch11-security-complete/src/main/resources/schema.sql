@@ -1,0 +1,19 @@
+DROP TABLE IF EXISTS system_operator;
+DROP TABLE IF EXISTS idol;
+DROP SEQUENCE IF EXISTS seq_idol_id;
+
+CREATE SEQUENCE seq_idol_id START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE idol(
+    id INTEGER DEFAULT NEXTVAL('seq_idol_id') PRIMARY KEY,
+    name VARCHAR(32) NOT NULL,
+    birthday DATE NOT NULL,
+    blood_type VARCHAR(7) NOT NULL
+);
+
+CREATE TABLE system_operator(
+    email VARCHAR(64) PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
+    role VARCHAR(16) NOT NULL,
+    password VARCHAR(64) NOT NULL
+);

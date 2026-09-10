@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/idol.css" th:href="@{/css/idol.css}">
+    <title>アイドル管理アプリ</title>
+</head>
+<body>
+    <h1>アイドル情報修正画面</h1>
+    <form method="post" action="index.html" >
+        <table>
+            <tbody>
+                <tr>
+                    <th>ID（修正不可）</th>
+                    <td >1</td>
+                </tr>
+                <tr>
+                    <th>名前</th>
+                    <td>
+                        <input type="text" >
+                        <div class="error" ></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>誕生日</th>
+                    <td>
+                        <input type="date" >
+                        <div class="error" ></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>血液型</th>
+                    <td>
+                        <select >
+                            <option value="">(未指定)</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="O">O</option>
+                            <option value="AB">AB</option>
+                            <option value="UNKNOWN">UNKNOWN</option>
+                        </select>
+                        <div class="error" ></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button>修正</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>spring-boot-book</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>ch03-java</module>
+        <module>ch03-java-complete</module>
+        <module>ch04-01-component-scan</module>
+        <module>ch04-01-component-scan-complete</module>
+        <module>ch04-03-di</module>
+        <module>ch04-03-di-complete</module>
+        <module>ch04-02-method-bean-definition</module>
+        <module>ch04-02-method-bean-definition-complete</module>
+        <module>ch05-database</module>
+        <module>ch05-database-complete</module>
+        <module>ch06-transaction</module>
+        <module>ch06-transaction-complete</module>
+        <module>ch07-web</module>
+        <module>ch07-web-complete</module>
+        <module>ch08-validation</module>
+        <module>ch08-validation-complete</module>
+        <module>ch09-webapi</module>
+        <module>ch09-webapi-complete</module>
+        <module>ch10-webapi02</module>
+        <module>ch10-webapi02-complete</module>
+        <module>ch11-security</module>
+        <module>ch11-security-complete</module>
+        <module>words-counter</module>
+    </modules>
+</project>
