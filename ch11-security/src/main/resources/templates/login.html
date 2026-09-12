@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/idol.css" th:href="@{/css/idol.css}">
+    <title>アイドル管理アプリ</title>
+</head>
+<body>
+    <h1>ログイン画面</h1>
+    <p th:if="${param.error}" class="error">ユーザー名またはパスワードが違います。</p>
+    <form method="post" action="idol/index.html" th:action="@{/login}">
+        <table>
+            <tbody>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td>
+                        <input type="text" name="username">
+                    </td>
+                </tr>
+                <tr>
+                    <th>パスワード</th>
+                    <td>
+                        <input type="password" name="password">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button>ログイン</button>
+    </form>
+</body>
+</html>
