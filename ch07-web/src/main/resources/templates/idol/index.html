@@ -14,7 +14,7 @@
     </form>
     <table>
         <thead>
-            <tr>
+            <tr >
                 <th>ID</th>
                 <th>名前</th>
                 <th>誕生日</th>
@@ -24,11 +24,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr >
-                <td >1</td>
-                <td >ささき　あああ</td>
-                <td >2001年1月1日</td>
-                <td >A</td>
+            <tr th;each="idol : ${idolList}" th:object="{idol}">
+                <td th:text="${idol.id}">1</td>
+                <td th:text="${idol.name}">ささき　あああ</td>
+                <td th:text="${idol.birthday}">2001年1月1日</td>
+                <td th:text="idol.bloodType">A</td>
                 <td><a href="fix.html" >修正</a></td>
                 <td>
                     <form method="post" action="index.html" >
