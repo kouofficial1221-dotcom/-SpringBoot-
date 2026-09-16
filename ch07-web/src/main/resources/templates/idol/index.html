@@ -2,14 +2,14 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../static/css/idol.css" >
+    <link rel="stylesheet" href="../../static/css/idol.css"  th:href="@{/css/idol.css}">
     <title>アイドル管理アプリ</title>
 </head>
 <body>
     <h1>アイドル一覧</h1>
-    <form method="get" action="index.html" >
+    <form method="get" action="index.html" th:action="@{/css/idol.css}">
         <label for="keyword">検索キーワード:</label>
-        <input id="keyword" name="keyword" type="text" >
+        <input id="keyword" name="keyword" type="text" th:calue="${param.keyword}">
         <button>検索</button>
     </form>
     <table>
@@ -25,19 +25,19 @@
         </thead>
         <tbody>
             <tr th;each="idol : ${idolList}" th:object="{idol}">
-                <td th:text="${idol.id}">1</td>
-                <td th:text="${idol.name}">ささき　あああ</td>
-                <td th:text="${idol.birthday}">2001年1月1日</td>
-                <td th:text="idol.bloodType">A</td>
-                <td><a href="fix.html" >修正</a></td>
+                <td th:text="*{id}">1</td>
+                <td th:text="*{name}">ささき　あああ</td>
+                <td th:text="*{#temporals.format(birthday, 'uuuu年M月d日'}">2001年1月1日</td>
+                <td th:text="*{bloodType}">A</td>
+                <td><a href="fix.html" th:href="@{'/idol/' + *{id}}">修正</a></td>
                 <td>
-                    <form method="post" action="index.html" >
+                    <form method="post" action="index.html" th:action="@{'/idol/graduate' + *{id}}">
                         <button>卒業</button>
                     </form>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a href="join.html" >新規加入アイドル入力画面</a>
+    <a href="join.html" th:href="@{/idol/join}">新規加入アイドル入力画面</a>
 </body>
 </html>

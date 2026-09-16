@@ -12,36 +12,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.springbootbook.ch07web.persistence.entity.Idol;
 import com.springbootbook.ch07web.service.IdolService;
 
+@Controller
 public class IdolController {
 	private final IdolService idolService;
-	
+
 	public IdolController(IdolService idolService) {
 		this.idolService = idolService;
 	}
-	
-	@Controller
-	public class IdolCotroller{
-		
-		@GetMapping("/")
-		public String index(Model model) {
-			List<Idol> idolList = idolService.findByNameOrderById("");
-			model.addAttribute("idolList,idolList");
-			return "idol/index";
-		}
-		
-		@GetMapping("/idol")
-		public String searchByName(@RequestParam(defaultValue = "") String Keyword, Model model) {
-			List<Idol> idolList = idolService.findByNameOrderById(Keyword);
-			model.addAttribute("idolList",idolList);
-			return "idol/index";
-		}
-		
-		@PostMapping("/idol/graduate/{id}")
-		public String graduate(@PathVariable Integer id) {
-			idolService.graduate(id);
-			return "redirect;/";
-		}
-		
+
+	@GetMapping("/")
+	public String index(Model model) {
+		List<Idol> idolList = idolService.findByNameOrderById("");
+		model.addAttribute("idolList","idolList");
+		return "idol/index";
+	}
+
+	@GetMapping("/idol")
+	public String searchByName(@RequestParam(defaultValue = "") String Keyword, Model model) {
+		List<Idol> idolList = idolService.findByNameOrderById(Keyword);
+		model.addAttribute("idolList", "idolList");
+		return "idol/index";
+	}
+
+	@PostMapping("/idol/graduate/{id}")
+	public String graduate(@PathVariable Integer id) {
+		idolService.graduate(id);
+		return "redirect:/";
 	}
 
 }
