@@ -23,14 +23,14 @@ public class IdolController {
 	@GetMapping("/")
 	public String index(Model model) {
 		List<Idol> idolList = idolService.findByNameOrderById("");
-		model.addAttribute("idolList","idolList");
+		model.addAttribute("idolList",idolList);
 		return "idol/index";
 	}
 
 	@GetMapping("/idol")
 	public String searchByName(@RequestParam(defaultValue = "") String Keyword, Model model) {
 		List<Idol> idolList = idolService.findByNameOrderById(Keyword);
-		model.addAttribute("idolList", "idolList");
+		model.addAttribute("idolList", idolList);
 		return "idol/index";
 	}
 

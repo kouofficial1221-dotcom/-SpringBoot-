@@ -17,54 +17,53 @@ import com.springbootbook.ch07web.service.IdolService;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class IdolControllerTest {
+    @MockitoBean
+    IdolService idolService;
 
-	@MockitoBean
-	IdolService idolService;
+    @Autowired
+    MockMvc mvc;
 
-	@Autowired
-	MockMvc mvc;
+    @Nested
+    @DisplayName("アイドル一覧画面")
+    class IndexTest {
+        @Test
+        @DisplayName("アイドル一覧画面にアクセスすると200 OK")
+        void success() throws Exception {
+            mvc.perform(get("/"))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("idol/index"));
+        }
+    }
 
-	@Nested
-	@DisplayName("アイドル一覧画面にアクセスすると200 OK")
-	class IndexTest {
-		void success() throws Exception {
-			mvc.perform(get("/"))
-					.andExpect(status().isOk())
-					.andExpect(view().name("idol/index"));
-		}
-	}
+    @Nested
+    @DisplayName("キーワード検索")
+    class KeywordSearchTest {
+        @Test
+        @DisplayName("キーワード「も」を指定すると200 OK")
+        void success() throws Exception {
+            mvc.perform(get("/idol").queryParam("keyword", "も"))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("idol/index"));
+        }
 
-	@Nested
-	@DisplayName("キーワード検索")
-	class KeywordSearchTest {
-		@Test
-		@DisplayName("キーワード「も」を指定すると200 OK")
-		void success() throws Exception {
-			mvc.perform(get("/idol").queryParam("keyword", "も"))
-					.andExpect(status().isOk())
-					.andExpect(view().name("idol/index"));
-		}
+        @Test
+        @DisplayName("クエリパラメーターが無い場合も200 OK")
+        void noParam() throws Exception {
+            mvc.perform(get("/idol"))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("idol/index"));
+        }
+    }
 
-		@Test
-		@DisplayName("クエリパラメータがない場合も200 OK")
-		void noParam() throws Exception {
-			mvc.perform(get("/idol").queryParam("keyword", "も"))
-					.andExpect(status().isOk())
-					.andExpect(view().name("idol/index"));
-		}
-
-	}
-
-	@Nested
-	@DisplayName("アイドル卒業")
-	class GraduateTest {
-		@Test
-		@DisplayName("卒業するアイドルを指定すると、アイドル一覧画面にリダイレクトする")
-		void success() throws Exception {
-			mvc.perform(post("/idol/graduate/1"))
-					.andExpect(status().is3xxRedirection())
-					.andExpect(redirectedUrl("/"));
-		}
-	}
-
+    @Nested
+    @DisplayName("アイドル卒業")
+    class GraduateTest {
+        @Test
+        @DisplayName("卒業するアイドルを指定すると、アイドル一覧画面にリダイレクトする")
+        void success() throws Exception {
+            mvc.perform(post("/idol/graduate/1"))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrl("/"));
+        }
+    }
 }
