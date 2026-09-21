@@ -1,8 +1,10 @@
 package com.springbootbook.ch08validation.web.controller;
 
-import com.springbootbook.ch08validation.persistence.entity.BloodType;
-import com.springbootbook.ch08validation.persistence.entity.Idol;
-import com.springbootbook.ch08validation.service.IdolService;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,12 +14,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.springbootbook.ch08validation.service.IdolService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -71,5 +68,30 @@ public class IdolControllerTest {
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/"));
         }
+    
+        @Test
+        @DisplayName("存在しないIDを指定してアイドル卒業を行うと、エラー画面に遷移する")
+        void doesNotExist() throws Exception{
+        		doReturn(false).when(idolService).exists(anyInt());
+        		mvc.perform(post("/idol/graduate/1"))
+        		.andExpect(status().isOk())
+        		.andExpect(view().name("error"));
+        }
     }
+    
+    @Nested
+    @DisplayName("新規加入画面")
+    class joinMainTest{
+    		@Test
+    		@DisplayName("新規加入画面にアクセスすると200 OK")
+    		void joinMain() throws Exception{
+    			mvc.perform(get("/idol/join"))
+    					.andExpect(status().isOk())
+    					.andExpect(view().name("idol/join"));
+    		}
+    }
+    
+
+    
+	
 }
